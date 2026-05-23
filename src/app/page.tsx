@@ -1,39 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
+const colleges = [
+  {
+    id: 1,
+    name: "IIT Hyderabad",
+    location: "Hyderabad",
+    fees: 200000,
+    rating: 4.8,
+    overview: "Top engineering institute in India.",
+    placements: "Highest package 60 LPA",
+    image:
+      "https://images.pexels.com/photos/159740/library-la-trobe-study-students-159740.jpeg",
+  },
+  {
+    id: 2,
+    name: "NIT Warangal",
+    location: "Warangal",
+    fees: 150000,
+    rating: 4.5,
+    overview: "Premier National Institute of Technology.",
+    placements: "Highest package 45 LPA",
+    image:
+      "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg",
+  },
+];
 
 export default function Home() {
-  const [colleges, setColleges] = useState([]);
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    fetch("/api/colleges")
-      .then((res) => res.json())
-      .then((data) => setColleges(data));
-  }, []);
-
-  const filteredColleges = colleges.filter((college: any) =>
-    college.name.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-4xl font-bold text-center mb-8">
         AI College Discovery Platform
       </h1>
 
-      <div className="flex justify-center mb-8">
-        <input
-          type="text"
-          placeholder="Search colleges..."
-          className="w-full max-w-md p-3 rounded-lg border"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredColleges.map((college: any) => (
+        {colleges.map((college) => (
           <div
             key={college.id}
             className="bg-white rounded-2xl shadow-lg overflow-hidden"
@@ -70,14 +70,14 @@ export default function Home() {
               </p>
 
               <div className="flex gap-3 mt-5">
-  <button className="bg-black text-white px-5 py-2 rounded-lg">
-    View Details
-  </button>
+                <button className="bg-black text-white px-5 py-2 rounded-lg">
+                  View Details
+                </button>
 
-  <button className="bg-blue-600 text-white px-5 py-2 rounded-lg">
-    Compare
-  </button>
-</div>
+                <button className="bg-blue-600 text-white px-5 py-2 rounded-lg">
+                  Compare
+                </button>
+              </div>
             </div>
           </div>
         ))}
